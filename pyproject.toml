@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "neo4j-app"
+version = "0.2.0"
+description = ""
+authors = ["dpublic"]
+readme = "README.md"
+packages = [
+    { include = "app" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+uvicorn = "^0.23.2"
+httpx = "0.27.2"
+langserve = {extras = ["server"], version = "0.2.3"}
+pydantic = "<2"
+neo4j-semantic-ollama = {path = "packages/neo4j-semantic-ollama", develop = true}
+
+
+[tool.poetry.group.dev.dependencies]
+langchain-cli = ">=0.0.15"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

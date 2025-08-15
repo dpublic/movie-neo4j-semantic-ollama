@@ -1,0 +1,22 @@
+services:
+    container:
+        image: ghcr.io/dpublic/movie-neo4j-semantic-ollama:0.2.0-SNAPSHOT0
+        volumes:
+            - ".:/code"
+        working_dir: /code
+        ports:
+            - "63380:8000"
+        environment:
+            - LLM=${LLM}
+            - OLLAMA_BASE_URL=${OLLAMA_BASE_URL}
+            - NEO4J_URI=${NEO4J_URI}
+            - NEO4J_USERNAME=${NEO4J_USERNAME}
+            - NEO4J_PASSWORD=${NEO4J_PASSWORD}
+
+        command: >
+                 /bin/sh -c "apt update
+                 && apt -y install curl vim git && pip install pytest pytest-cov python-dotenv yapf
+                 && useradd -m -s /bin/bash -u ${UID} ${USER}
+                 && echo "${USER}:${USER}" | chpasswd
+                 && usermod -a -G sudo ${USER}
+                 && trap : TERM INT; sleep infinity & wait"
